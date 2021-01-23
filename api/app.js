@@ -1,6 +1,7 @@
 'use strict';
 
 // load modules
+const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
 const sequelize = require('./models/index.js').sequelize;
@@ -19,6 +20,8 @@ const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'tr
 
 // create the Express app
 const app = express();
+
+app.use(cors());
 
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
