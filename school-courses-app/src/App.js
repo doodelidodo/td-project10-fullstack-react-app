@@ -15,6 +15,7 @@ import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
 import Authenticated from './components/Authenticated';
+import Courses from "./components/Courses";
 import PrivateRoute from './PrivateRoute';
 
 function App() {
@@ -23,8 +24,8 @@ function App() {
       <div>
         <Header />
         <Switch>
-          <Route exact path="/" component={Public} />
-          <PrivateRoute path="/authenticated" component={Authenticated} />
+          <Route exact path="/" component={Courses} />
+          <PrivateRoute path="/authenticated" component={Courses} />
           <Route path="/signin" component={UserSignIn} />
           <Route path="/signup" component={UserSignUp} />
           <Route path="/signout" component={UserSignOut} />
