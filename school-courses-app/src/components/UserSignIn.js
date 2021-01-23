@@ -65,7 +65,7 @@ export default function UserSignIn (props) {
                   type="text"
                   value={emailAddress}
                   onChange={change}
-                  placeholder="User Name" />
+                  placeholder="Email Address" />
                 <input
                   id="password"
                   name="password"
