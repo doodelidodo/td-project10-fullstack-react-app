@@ -1,25 +1,37 @@
 import logo from './logo.svg';
-import React, { useState, useEffect } from 'react'
-import './App.css';
-import axios from 'axios';
+import React, {useContext, useState, useEffect} from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
+import Context from './Context';
 
+//components
+import Header from './components/Header';
+import Public from './components/Public';
+import NotFound from './components/NotFound';
+import UserSignUp from './components/UserSignUp';
+import UserSignIn from './components/UserSignIn';
+import UserSignOut from './components/UserSignOut';
+import Authenticated from './components/Authenticated';
+import PrivateRoute from './PrivateRoute';
 
 function App() {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    axios(`http://localhost:5000/api/courses`)
-        .then(response => setData(response.data.courses))
-        .catch(error => console.log('Error fetching and parsing data', error))
-        .finally(() => setIsLoading(false));
-  }, []);
-  console.log(data);
   return (
-
-    <div className="App">
-
-    </div>
+    <Router>
+      <div>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Public} />
+          <PrivateRoute path="/authenticated" component={Authenticated} />
+          <Route path="/signin" component={UserSignIn} />
+          <Route path="/signup" component={UserSignUp} />
+          <Route path="/signout" component={UserSignOut} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
