@@ -8,6 +8,7 @@ const { authenticateUser } = require('../middleware/auth-user');
 router.get('/', authenticateUser, asyncHandler( async (req, res) => {
     const user = req.currentUser;
     res.json({
+        "id": user.id,
         "firstName": user.firstName,
         "lastName": user.lastName,
         "emailAddress": user.emailAddress
