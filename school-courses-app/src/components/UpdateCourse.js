@@ -82,7 +82,7 @@ export default function CreateCourse(props) {
                 <Form cancel={cancel}
                       errors={errors}
                       submit={submit}
-                      submitButtonText="Create Course"
+                      submitButtonText="Update Course"
                       elements={() => (
                           <React.Fragment>
                               <div className="grid-66">
