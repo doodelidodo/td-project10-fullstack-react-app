@@ -47,12 +47,15 @@ export default function UserSignUp() {
     };
 
     if (user.password !== user.confirmPassword) {
-       setErrors({errors: ['Password do not match']})
+       setErrors(['Passwords do not match']);
     } else {
         context.data.createUser(user)
             .then( errors => {
+                if (user.password !== user.confirmPassword) {
+                    errors.put('Passwords do not match');
+                }
                 if (errors.length) {
-                    setErrors(errors)
+                    setErrors(errors);
                 } else {
                     context.actions.signIn(emailAddress, password)
                         .then(() => {
