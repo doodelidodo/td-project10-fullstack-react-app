@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import axios from "axios";
 
 import Context from "../Context";
@@ -70,7 +71,9 @@ export default function CourseDetails (props) {
                         <p>By {firstName + " " + lastName}</p>
                     </div>
                     <div className="course--description">
-                        <p>{description}</p>
+                        <ReactMarkdown>
+                            {description}
+                        </ReactMarkdown>
                     </div>
                 </div>
                 <div className="grid-25 grid-right">
@@ -82,9 +85,10 @@ export default function CourseDetails (props) {
                             </li>
                             <li className="course--stats--list--item">
                                 <h4>Materials Needed</h4>
-                                {materialsNeeded}
                                 <ul>
-
+                                    <ReactMarkdown>
+                                        {materialsNeeded}
+                                    </ReactMarkdown>
                                 </ul>
                             </li>
                         </ul>

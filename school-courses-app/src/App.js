@@ -24,7 +24,6 @@ function App() {
                 <Header/>
                 <Switch>
                     <Route exact path="/" component={Courses}/>
-                    <PrivateRoute path="/authenticated" component={Courses}/>
                     <PrivateRoute path="/courses/:id/update" component={UpdateCourses}/>
                     <Route path="/signin" component={UserSignIn}/>
                     <Route path="/signup" component={UserSignUp}/>
