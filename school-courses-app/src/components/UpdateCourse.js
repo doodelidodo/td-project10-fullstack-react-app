@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import Form from './Form';
 import Context from "../Context";
 import axios from "axios";
@@ -25,7 +25,7 @@ export default function CreateCourse(props) {
                 setMaterialsNeeded(response.data.materialsNeeded);
             })
             .catch(error => console.log('Error fetching and parsing data', error));
-    }, []);
+    });
 
     const change = (event) => {
         const value = event.target.value;

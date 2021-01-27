@@ -33,7 +33,7 @@ export default function CourseDetails (props) {
                 }
             })
             .catch(error => console.log('Error fetching and parsing data', error));
-    }, []);
+    });
 
     const deleteCourse = () => {
         context.data.deleteCourse(id, authUser.emailAddress, authUser.password)

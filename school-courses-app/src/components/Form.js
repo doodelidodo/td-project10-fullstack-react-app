@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default (props) => {
+export default function Form (props) {
   const {
     cancel,
     errors,

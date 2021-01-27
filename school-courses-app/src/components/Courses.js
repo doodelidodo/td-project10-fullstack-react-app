@@ -5,7 +5,7 @@ import axios from "axios";
 import CourseItem from "./CourseItem";
 import Context from "../Context";
 
-export default () => {
+export default function Courses () {
     const context = useContext(Context.Context);
     const authUser = context.authenticatedUser;
     const [data, setData] = useState([]);
