@@ -28,7 +28,7 @@ export default function CourseDetails (props) {
                 setMaterialsNeeded(response.data.materialsNeeded);
                 setFirstName(response.data.user.firstName);
                 setLastName(response.data.user.lastName);
-                if(authUser.id === response.data.user.id) {
+                if(authUser && authUser.id === response.data.user.id) {
                     setOwner(true);
                 }
             })

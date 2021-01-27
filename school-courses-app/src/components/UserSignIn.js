@@ -26,7 +26,7 @@ export default function UserSignIn (props) {
   }
 
   const submit = () => {
-    const { from } = props.location.state || { from: { pathname: '/authenticated' } };
+    const { from } = props.location.state || { from: { pathname: '/' } };
 
     context.actions.signIn(emailAddress, password)
         .then((user) => {
