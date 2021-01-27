@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from "axios";
 
 import Context from "../Context";
 
 export default function CourseDetails (props) {
     const context = useContext(Context.Context);
+    const history = useHistory();
     const authUser = context.authenticatedUser;
-    console.log(authUser);
 
     const id = props.match.params.id;
     const [title, setTitle] = useState('');
@@ -21,7 +21,6 @@ export default function CourseDetails (props) {
     useEffect(() => {
         axios(`http://localhost:5000/api/courses/${id}`)
             .then(response => {
-                console.log(response);
                 setTitle(response.data.title);
                 setDescription(response.data.description);
                 setEstimatedTime(response.data.estimatedTime);
@@ -35,6 +34,15 @@ export default function CourseDetails (props) {
             .catch(error => console.log('Error fetching and parsing data', error));
     }, []);
 
+    const deleteCourse = () => {
+        context.data.deleteCourse(id, authUser.emailAddress, authUser.password)
+            .then(() => history.push('/'))
+            .catch((err) => {
+                    console.log(err);
+                    history.push('/error');
+        });
+    }
+
     return (
         <div>
             <div className="actions--bar">
@@ -45,7 +53,7 @@ export default function CourseDetails (props) {
                                 owner ? (
                                     <span>
                                         <Link className="button" to={'/courses/' + id + 'update'}>Update Course</Link>
-                                        <Link className="button" to="#">Delete Course</Link>
+                                        <Link className="button" to="#" onClick={deleteCourse}>Delete Course</Link>
                                     </span>
                                 ) :
                                     ""

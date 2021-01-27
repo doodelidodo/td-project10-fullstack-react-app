@@ -43,6 +43,8 @@ export default function CreateCourse(props) {
             userId: authUser.id,
         }
 
+        console.log(course);
+
         context.data.createCourse(course, authUser.emailAddress, authUser.password)
             .then( errors => {
                 if (errors.length) {
@@ -116,7 +118,8 @@ export default function CreateCourse(props) {
                                               <div>
                                                   <textarea id="materialsNeeded" name="materialsNeeded"
                                                              className=""
-                                                             placeholder="List materials...">
+                                                             placeholder="List materials..."
+                                                            onChange={change} >
                                                   </textarea>
                                               </div>
                                           </li>

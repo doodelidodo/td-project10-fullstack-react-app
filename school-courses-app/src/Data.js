@@ -16,7 +16,6 @@ export default class Data {
     }
 
     if (requiresAuth) {
-      console.log("Credentials: " + credentials);
       const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
     }
@@ -68,7 +67,7 @@ export default class Data {
 
   async deleteCourse(id, emailAddress, password) {
     const path = '/courses/' + id;
-    const response = await this.api(path, 'POST', null, true, { emailAddress, password });
+    const response = await this.api(path, 'DELETE', null, true, { emailAddress, password });
     if (response.status === 204) {
       return [];
     }
