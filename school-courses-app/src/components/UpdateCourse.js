@@ -1,18 +1,31 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import Form from './Form';
 import Context from "../Context";
+import axios from "axios";
 
 export default function CreateCourse(props) {
-    const context = useContext(Context.Context)
+    const context = useContext(Context.Context);
+    const history = useHistory();
     const authUser = context.authenticatedUser;
-    let history = useHistory();
 
+    const id = props.match.params.id;
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [estimatedTime, setEstimatedTime] = useState('');
     const [materialsNeeded, setMaterialsNeeded] = useState('');
     const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        axios(`http://localhost:5000/api/courses/${id}`)
+            .then(response => {
+                setTitle(response.data.title);
+                setDescription(response.data.description);
+                setEstimatedTime(response.data.estimatedTime);
+                setMaterialsNeeded(response.data.materialsNeeded);
+            })
+            .catch(error => console.log('Error fetching and parsing data', error));
+    }, []);
 
     const change = (event) => {
         const value = event.target.value;
@@ -36,6 +49,7 @@ export default function CreateCourse(props) {
 
     const submit = () => {
         const course = {
+            id,
             title,
             description,
             estimatedTime,
@@ -43,12 +57,12 @@ export default function CreateCourse(props) {
             userId: authUser.id,
         }
 
-        context.data.createCourse(course, authUser.emailAddress, authUser.password)
+        context.data.updateCourse(course, authUser.emailAddress, authUser.password)
             .then( errors => {
                 if (errors.length) {
                     setErrors(errors)
                 } else {
-                   history.push("/");
+                    history.push("/courses/" + id);
                 }
             })
             .catch((err) => {
@@ -63,7 +77,7 @@ export default function CreateCourse(props) {
 
     return (
         <div className="bounds course--detail">
-            <h1>Create Course</h1>
+            <h1>Update Course</h1>
             <div>
                 <Form cancel={cancel}
                       errors={errors}
@@ -80,6 +94,7 @@ export default function CreateCourse(props) {
                                                  type="text"
                                                  className="input-title course--title--input"
                                                  placeholder="Course title..."
+                                                 value={title}
                                                  onChange={change}/>
                                       </div>
                                       <p>{"By " + authUser.firstName + " " + authUser.lastName}</p>
@@ -87,11 +102,12 @@ export default function CreateCourse(props) {
                                   <div className="course--description">
                                       <div>
                                               <textarea
-                                                id="description"
-                                                name="description"
-                                                className=""
-                                                placeholder="Course description..."
-                                                onChange={change}>
+                                                  id="description"
+                                                  name="description"
+                                                  className=""
+                                                  placeholder="Course description..."
+                                                  value={description}
+                                                  onChange={change}>
                                               </textarea>
                                       </div>
                                   </div>
@@ -108,6 +124,7 @@ export default function CreateCourse(props) {
                                                       type="text"
                                                       className="course--time--input"
                                                       placeholder="Hours"
+                                                      value={estimatedTime}
                                                       onChange={change} />
                                               </div>
                                           </li>
@@ -115,8 +132,9 @@ export default function CreateCourse(props) {
                                               <h4>Materials Needed</h4>
                                               <div>
                                                   <textarea id="materialsNeeded" name="materialsNeeded"
-                                                             className=""
-                                                             placeholder="List materials..."
+                                                            className=""
+                                                            placeholder="List materials..."
+                                                            value={materialsNeeded}
                                                             onChange={change} >
                                                   </textarea>
                                               </div>
@@ -125,7 +143,7 @@ export default function CreateCourse(props) {
                                   </div>
                               </div>
                           </React.Fragment>
-              )}/>
+                      )}/>
             </div>
         </div>
     );

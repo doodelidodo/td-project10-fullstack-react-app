@@ -27,7 +27,7 @@ export default function CourseDetails (props) {
                 setMaterialsNeeded(response.data.materialsNeeded);
                 setFirstName(response.data.user.firstName);
                 setLastName(response.data.user.lastName);
-                if(authUser.emailAddress === response.data.user.emailAddress) {
+                if(authUser.id === response.data.user.id) {
                     setOwner(true);
                 }
             })
@@ -52,11 +52,11 @@ export default function CourseDetails (props) {
                             {
                                 owner ? (
                                     <span>
-                                        <Link className="button" to={'/courses/' + id + 'update'}>Update Course</Link>
+                                        <Link className="button" to={'/courses/' + id + '/update'}>Update Course</Link>
                                         <Link className="button" to="#" onClick={deleteCourse}>Delete Course</Link>
                                     </span>
                                 ) :
-                                    ""
+                                    null
                             }
                         <Link className="button button-secondary" to="/">Return to List</Link>
                     </div>

@@ -15,6 +15,7 @@ import Courses from "./components/Courses";
 import CourseDetail from "./components/CourseDetail";
 import CreateCourse from "./components/CreateCourse";
 import PrivateRoute from './PrivateRoute';
+import UpdateCourses from './components/UpdateCourse';
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Courses}/>
                     <PrivateRoute path="/authenticated" component={Courses}/>
+                    <PrivateRoute path="/courses/:id/update" component={UpdateCourses}/>
                     <Route path="/signin" component={UserSignIn}/>
                     <Route path="/signup" component={UserSignUp}/>
                     <Route path="/signout" component={UserSignOut}/>
