@@ -18,7 +18,7 @@ export default function Courses () {
                 console.log('Error fetching and parsing data', error)
                 history.push('/error');
             });
-    }, []);
+    }, [history]);
 
     let courses = data.map(course => <CourseItem course={course} key={course.id} />);
 

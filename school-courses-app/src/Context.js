@@ -54,6 +54,8 @@ export class Provider extends Component {
 
 export const Consumer = Context.Consumer;
 
-export default { Context }
+const context = { Context };
+
+export default context;
 
 

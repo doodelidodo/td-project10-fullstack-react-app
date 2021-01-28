@@ -34,7 +34,7 @@ export default function CreateCourse(props) {
                     history.push('/error')
                 }
             });
-    },[]);
+    },[history, id]);
 
     const change = (event) => {
         const value = event.target.value;
