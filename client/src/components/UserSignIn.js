@@ -9,7 +9,7 @@ export default function UserSignIn (props) {
 
   const [emailAddress, setEmail] = useState('');
   const [password, setPass] = useState('');
-  const [errors] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const change = (event) => {
     const value = event.target.value;
@@ -26,14 +26,13 @@ export default function UserSignIn (props) {
   }
 
   const submit = () => {
+    const from = props.location.state;
     context.actions.signIn(emailAddress, password)
         .then((user) => {
           if (user === null) {
-            this.setState(() => {
-              return { errors: [ 'Sign-in was unsuccessful' ] };
-            });
+              setErrors([ 'Sign-in was unsuccessful' ] );
           } else {
-            history.goBack();
+            from ? history.push(from.from.pathname) : history.goBack();
           }
         })
         .catch((error) => {

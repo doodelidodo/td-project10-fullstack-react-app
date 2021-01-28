@@ -71,13 +71,10 @@ export default class Data {
     if(response.status === 204) {
       return [];
     }
-    else if (response.status === 400) {
+    else {
       return response.json().then(data => {
         return data.errors;
       });
-    }
-    else {
-      throw new Error();
     }
   }
 

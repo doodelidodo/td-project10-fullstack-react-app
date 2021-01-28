@@ -19,6 +19,10 @@ export default function CreateCourse(props) {
     useEffect(() => {
         axios(`http://localhost:5000/api/courses/${id}`)
             .then(response => {
+                const authUser = context.authenticatedUser;
+                if(response.data.user.id !== authUser.id) {
+                    history.push('/forbidden');
+                }
                 setTitle(response.data.title);
                 setDescription(response.data.description);
                 setEstimatedTime(response.data.estimatedTime);
@@ -34,7 +38,7 @@ export default function CreateCourse(props) {
                     history.push('/error')
                 }
             });
-    },[history, id]);
+    },[history, id, context.authenticatedUser]);
 
     const change = (event) => {
         const value = event.target.value;

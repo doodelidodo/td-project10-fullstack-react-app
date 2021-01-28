@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from "axios";
 
 import CourseItem from "./CourseItem";
-import Context from "../Context";
 
 export default function Courses () {
-    const context = useContext(Context.Context);
-    const authUser = context.authenticatedUser;
     const [data, setData] = useState([]);
     const history = useHistory();
 
