@@ -43,7 +43,7 @@ export default function CourseDetails (props) {
                     history.push('/error')
                 }
             });
-    });
+    },[authUser, history, id]);
 
     // delete a course and route to home (/);
     const deleteCourse = () => {
