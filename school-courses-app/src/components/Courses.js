@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from "axios";
 
 import CourseItem from "./CourseItem";
@@ -9,6 +9,7 @@ export default function Courses () {
     const context = useContext(Context.Context);
     const authUser = context.authenticatedUser;
     const [data, setData] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
         axios(`http://localhost:5000/api/courses`)
