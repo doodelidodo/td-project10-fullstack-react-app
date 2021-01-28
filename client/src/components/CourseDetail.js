@@ -46,7 +46,9 @@ export default function CourseDetails (props) {
 
     const deleteCourse = () => {
         context.data.deleteCourse(id, authUser.emailAddress, authUser.password)
-            .then(() => history.push('/'))
+            .then(() => {
+                history.push('/')
+            })
             .catch((err) => {
                     console.log(err);
                     history.push('/error');
