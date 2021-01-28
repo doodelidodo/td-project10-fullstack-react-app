@@ -17,9 +17,11 @@ export default function CreateCourse(props) {
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
+        //fetching the course with the param course id
         axios(`http://localhost:5000/api/courses/${id}`)
             .then(response => {
                 const authUser = context.authenticatedUser;
+                //if user id not matching with signed in user id, reroute to forbidden page
                 if(response.data.user.id !== authUser.id) {
                     history.push('/forbidden');
                 }
@@ -70,6 +72,7 @@ export default function CreateCourse(props) {
             userId: authUser.id,
         }
 
+        //update the course and reroute to course details, if errors show errors
         context.data.updateCourse(course, authUser.emailAddress, authUser.password)
             .then( errors => {
                 if (errors.length) {

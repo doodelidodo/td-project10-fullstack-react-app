@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import Form from './Form';
 import Context from "../Context";
 
-export default function CreateCourse(props) {
+export default function CreateCourse() {
     const context = useContext(Context.Context)
     const authUser = context.authenticatedUser;
     let history = useHistory();
@@ -43,6 +43,7 @@ export default function CreateCourse(props) {
             userId: authUser.id,
         }
 
+        // create the course and routing to home, if errors appears setting error messages
         context.data.createCourse(course, authUser.emailAddress, authUser.password)
             .then( errors => {
                 if (errors.length) {

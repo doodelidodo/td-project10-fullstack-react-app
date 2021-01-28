@@ -27,6 +27,8 @@ export default function UserSignIn (props) {
 
   const submit = () => {
     const from = props.location.state;
+
+    //sign in the user, if user exist and auth is ok, go back to the site the user is coming from
     context.actions.signIn(emailAddress, password)
         .then((user) => {
           if (user === null) {

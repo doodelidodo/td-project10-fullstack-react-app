@@ -20,6 +20,7 @@ export default function CourseDetails (props) {
     const [owner, setOwner] = useState(false);
 
     useEffect(() => {
+        //fetching course with the param course id
         axios(`http://localhost:5000/api/courses/${id}`)
             .then(response => {
                 setTitle(response.data.title);
@@ -44,6 +45,7 @@ export default function CourseDetails (props) {
             });
     });
 
+    // delete a course and route to home (/);
     const deleteCourse = () => {
         context.data.deleteCourse(id, authUser.emailAddress, authUser.password)
             .then(() => {

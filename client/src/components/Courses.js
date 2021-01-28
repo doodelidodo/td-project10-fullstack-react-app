@@ -9,6 +9,7 @@ export default function Courses () {
     const history = useHistory();
 
     useEffect(() => {
+        //fetching all courses
         axios(`http://localhost:5000/api/courses`)
             .then(response => setData(response.data.courses))
             .catch(error => {
