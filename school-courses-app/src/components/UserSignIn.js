@@ -26,8 +26,6 @@ export default function UserSignIn (props) {
   }
 
   const submit = () => {
-    const { from } = props.location.state || { from: { pathname: '/' } };
-
     context.actions.signIn(emailAddress, password)
         .then((user) => {
           if (user === null) {
@@ -35,7 +33,7 @@ export default function UserSignIn (props) {
               return { errors: [ 'Sign-in was unsuccessful' ] };
             });
           } else {
-            history.push(from);
+            history.goBack();
           }
         })
         .catch((error) => {

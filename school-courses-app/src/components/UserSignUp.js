@@ -3,7 +3,7 @@ import { Link, useHistory} from 'react-router-dom';
 import Form from './Form';
 import Context from '../Context'
 
-export default function UserSignUp() {
+export default function UserSignUp(props) {
   const context = useContext(Context.Context)
   let history = useHistory();
 
@@ -59,7 +59,7 @@ export default function UserSignUp() {
                 } else {
                     context.actions.signIn(emailAddress, password)
                         .then(() => {
-                            history.push('/authenticated');
+                            history.goBack();
                         });
                 }
             })
