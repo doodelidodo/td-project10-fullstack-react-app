@@ -16,6 +16,8 @@ import CourseDetail from "./components/CourseDetail";
 import CreateCourse from "./components/CreateCourse";
 import PrivateRoute from './PrivateRoute';
 import UpdateCourses from './components/UpdateCourse';
+import Forbidden from './components/Forbidden';
+import UnhandledError from "./components/UnhandledError";
 
 function App() {
     return (
@@ -30,6 +32,9 @@ function App() {
                     <Route path="/signout" component={UserSignOut}/>
                     <PrivateRoute exact path="/courses/create" component={CreateCourse}/>
                     <Route path="/courses/:id" component={CourseDetail}/>
+                    <Route path="/notfound" component={NotFound}/>
+                    <Route path="/forbidden" component={Forbidden}/>
+                    <Route path="/error" component={UnhandledError}/>
                     <Route component={NotFound}/>
                 </Switch>
             </div>

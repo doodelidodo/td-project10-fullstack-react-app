@@ -13,7 +13,10 @@ export default function Courses () {
     useEffect(() => {
         axios(`http://localhost:5000/api/courses`)
             .then(response => setData(response.data.courses))
-            .catch(error => console.log('Error fetching and parsing data', error));
+            .catch(error => {
+                console.log('Error fetching and parsing data', error)
+                history.push('/error');
+            });
     }, []);
 
     let courses = data.map(course => <CourseItem course={course} key={course.id} />);

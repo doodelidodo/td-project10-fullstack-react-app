@@ -32,7 +32,16 @@ export default function CourseDetails (props) {
                     setOwner(true);
                 }
             })
-            .catch(error => console.log('Error fetching and parsing data', error));
+            .catch(error => {
+                console.log('Error fetching and parsing data', error)
+                if(error.response.status === 404) {
+                    history.push('/notfound');
+                } else if(error.response.status === 403) {
+                    history.push('/forbidden');
+                } else {
+                    history.push('/error')
+                }
+            });
     });
 
     const deleteCourse = () => {
